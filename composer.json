@@ -1,0 +1,17 @@
+{
+    "name": "mikk150/react-serial",
+    "description": "Library to read linux serial",
+    "type": "library",
+    "license": "GPLv2",
+
+    "require": {
+        "react/stream": "^0.4.3",
+        "react/event-loop": "^0.4"
+    },
+
+    "autoload": {
+    "psr-4": {
+      "mikk150\\serial\\": "src/"
+    }
+  }
+}
