@@ -46,7 +46,7 @@ class SerialEmitter extends EventEmitter
     {
         $this->configureDevice($device, $baudrate, $pairity, $flow, $stopbits, $charlength);
 
-        $stream = fopen($device, 'r+');
+        $stream = fopen($device, 'rw+');
 
         $this->fileStreamer = new FileStreamer($stream, $loop);
 
@@ -62,6 +62,10 @@ class SerialEmitter extends EventEmitter
         $this->fileStreamer->on('data', function ($data) use ($that) {
             $that->handleData($data);
         });
+    }
+    public function write($data)
+    {
+        $this->fileStreamer->write($data);
     }
 
     protected function configureDevice($device, $baudrate, $pairity, $flow, $stopbits, $charlength)
@@ -113,7 +117,8 @@ class SerialEmitter extends EventEmitter
         }
     }
 
-    public function handleData($data)
+
+    protected function handleData($data)
     {
         $this->emit('data', [$data]);
     }
